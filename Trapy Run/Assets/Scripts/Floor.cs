@@ -17,6 +17,7 @@ public class Floor : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         if (gameObject.transform.parent.gameObject.GetComponent<Rigidbody>() == null)
         {
+            gameObject.GetComponent<Renderer>().material.color = new Color(1, 0.5f, 0.5f);
             gameObject.transform.parent.gameObject.GetComponent<BoxCollider>().isTrigger = true;
             gameObject.transform.parent.gameObject.AddComponent<Rigidbody>();
         }

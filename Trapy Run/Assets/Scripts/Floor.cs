@@ -12,6 +12,7 @@ public class Floor : MonoBehaviour
         }      
     }
 
+
     private IEnumerator Fall()
     {
         yield return new WaitForSeconds(0.2f);
@@ -19,7 +20,7 @@ public class Floor : MonoBehaviour
         {
             gameObject.GetComponent<Renderer>().material.color = new Color(1, 0.5f, 0.5f);
             gameObject.transform.parent.gameObject.GetComponent<BoxCollider>().isTrigger = true;
-            gameObject.transform.parent.gameObject.AddComponent<Rigidbody>();
+            gameObject.transform.parent.gameObject.AddComponent<Rigidbody>().velocity = new Vector3(0, -1, 0);
         }
     }
 }

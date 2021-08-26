@@ -8,6 +8,7 @@ TagManager:
   - Minion
   - MinionMagnet
   - TriggerAttack
+  - Trap
   layers:
   - Default
   - TransparentFX

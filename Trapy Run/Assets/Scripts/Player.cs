@@ -4,18 +4,22 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    private readonly float _speed = 0.1f;
+    public static bool RescueMode, WinMode;
+
+    private readonly float _speed = 0.15f;
 
     private void FixedUpdate()
     {
+        Win();
         MoveIfInEditor();
         MoveIfInAndroidPlatform();
+        Rescue();
     }
 
     private void MoveIfInEditor()
     {
 #if UNITY_EDITOR
-        if (!Minions.Attack)
+        if (!Minions.Attack && !WinMode)
         {
             transform.position = new Vector3(transform.position.x + _speed, transform.position.y, transform.position.z);
             if (Input.GetKey(KeyCode.A))
@@ -33,6 +37,37 @@ public class Player : MonoBehaviour
 
     private void MoveIfInAndroidPlatform()
     {
+        
+    }
 
+    private void Rescue()
+    {
+        var centerOfRescuePoint = GameObject.Find("RescuePoint").GetComponent<MeshRenderer>().bounds.center.x;
+        var endOfRescuePoint = GameObject.Find("RescuePoint").GetComponent<MeshRenderer>().bounds.max.x;
+
+        if (transform.position.x > centerOfRescuePoint && !RescueMode)
+        {
+            RescueMode = true;
+
+            var jump = new Vector3(0, 1f, 0);
+            jump = jump.normalized;
+            jump = jump * 750f;
+
+            gameObject.GetComponent<Rigidbody>().AddForce(jump);
+        }
+        else if(transform.position.x > endOfRescuePoint)
+        {
+            return;
+        }
+    }
+
+    private void Win()
+    {
+        var centerOfHelicopter = GameObject.Find("Helicopter").GetComponent<MeshRenderer>().bounds.center.x;
+
+        if (transform.position.x > centerOfHelicopter)
+        {
+            WinMode = true;
+        }
     }
 }

@@ -9,7 +9,7 @@ public class CameraManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _playerPosition = GameObject.Find("Player").transform.position;
+        _playerPosition = GameObject.Find("PlayerCapsule").transform.position;
 
         transform.position = new Vector3(_playerPosition.x - 40, 22, 0);
     }

@@ -46,12 +46,12 @@ public class Minions : MonoBehaviour
         if (_isMagnetTriggered)
         {
             var triggeredLerpPosition = new Vector3(_playerPosition.x + 50, transform.position.y, _playerPosition.z);
-            transform.position = Vector3.Lerp(transform.position, triggeredLerpPosition, 0.0035f);
+            transform.position = Vector3.Lerp(transform.position, triggeredLerpPosition, 0.003f);
             return;
         }
 
         var lerpPosition = new Vector3(_playerPosition.x + 50, transform.position.y, transform.position.z);
-        transform.position = Vector3.Lerp(transform.position, lerpPosition, 0.0035f);
+        transform.position = Vector3.Lerp(transform.position, lerpPosition, 0.003f);
     }
     private void MoveTowardsRight()
     {
@@ -62,6 +62,7 @@ public class Minions : MonoBehaviour
 
         if(transform.position.z < _decisivePosition.z)
         {
+            transform.rotation = Quaternion.Euler(0f, 90f, 0f);
             _playerPosition = GameObject.Find("PlayerCapsule").transform.position;
             var triggeredLerpPosition = new Vector3(_playerPosition.x, transform.position.y, _playerPosition.z);
             transform.position = Vector3.Lerp(transform.position, triggeredLerpPosition, _speed);
@@ -84,6 +85,7 @@ public class Minions : MonoBehaviour
 
         if (transform.position.z > _decisivePosition.z)
         {
+            transform.rotation = Quaternion.Euler(0f, 90f, 0f);
             _playerPosition = GameObject.Find("PlayerCapsule").transform.position;
             var triggeredLerpPosition = new Vector3(_playerPosition.x, transform.position.y, _playerPosition.z);
             transform.position = Vector3.Lerp(transform.position, triggeredLerpPosition, _speed);
@@ -104,7 +106,7 @@ public class Minions : MonoBehaviour
             if (!_isAttackTriggered && !Player.RescueMode) // Don't spawn if game over or win.
             {
                 var spawnPosition = new Vector3(_playerPosition.x - 30, 2, transform.position.z);
-                Instantiate(Minion, spawnPosition, Quaternion.identity);
+                Instantiate(Minion, spawnPosition, Quaternion.Euler(0, 90, 0));
             }
 
             Destroy(gameObject);
@@ -134,6 +136,8 @@ public class Minions : MonoBehaviour
                 jump = jump * 500f;
 
                 gameObject.GetComponent<Rigidbody>().AddForce(jump);
+                gameObject.GetComponent<Animator>().SetTrigger("Fall");
+                GameObject.Find("PlayerCapsule").GetComponent<Animator>().SetTrigger("Fall");
             }
 
             Attack = true;

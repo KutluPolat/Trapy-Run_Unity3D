@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        _player = GameObject.Find("Player");
+        _player = GameObject.Find("PlayerCapsule");
     }
 
     private void Update()

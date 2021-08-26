@@ -18,7 +18,7 @@ public class SpawnMinions : MonoBehaviour
 
     private void Start()
     {
-        //InvokeRepeating("FillTheLinesWithMinions", 0, 1f);
+        InvokeRepeating("FillTheLinesWithMinions", 0, 1f);
     }
     private void FillTheLinesWithMinions()
     {

@@ -14,13 +14,13 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        LevelText.text = "Level: " + PlayerPrefs.GetInt("LevelText").ToString();
-
         if (PlayerPrefs.GetInt("Level") == 0)
             PlayerPrefs.SetInt("Level", 1);
 
         if (PlayerPrefs.GetInt("LevelText") == 0)
             PlayerPrefs.SetInt("LevelText", 1);
+
+        LevelText.text = "Level: " + PlayerPrefs.GetInt("LevelText").ToString();
 
         LoadScene();
     }

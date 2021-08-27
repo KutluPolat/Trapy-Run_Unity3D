@@ -51,28 +51,12 @@ public class Player : MonoBehaviour
 
         if (Input.touchCount > 0)
         {
-            if (Input.touches[0].phase == TouchPhase.Began || Input.touches[0].phase == TouchPhase.Stationary)
-            {
-                // Basically, I'm saving the finger position when the player touches the screen the first time or holds still.
-                // And I compare that positions with new ones after player moved his finger.
-                // Rescuing action will start if the player moves his or her finger only in the y-axis. (Player has 50 pixels of the x-axis error margin.)
-                _initialFingerPosition = Input.touches[0].position;
-            }
-
             if (Input.touches[0].phase == TouchPhase.Moved)
             {
-                if (Input.touches[0].position.y > _initialFingerPosition.y + 50 || Input.touches[0].position.y < _initialFingerPosition.y - 50) //If finger moves in y axis, return.
-                {
-                    return;
-                }
-                if (Input.touches[0].position.x > _initialFingerPosition.x)
-                {
-                    transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - 0.05f);
-                }
-                else if (Input.touches[0].position.x < _initialFingerPosition.x)
-                {
-                    transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + 0.05f);
-                }
+                transform.position = new Vector3(
+                    transform.position.x,
+                    transform.position.y,
+                    transform.position.z - Input.touches[0].deltaPosition.x * 0.002f);
             }
         }
 #endif

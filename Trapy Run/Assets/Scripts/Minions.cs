@@ -5,7 +5,7 @@ using UnityEngine;
 public class Minions : MonoBehaviour
 {
     private bool _isMagnetTriggered, _isAttackTriggered;
-    private float _speed = 0.015f;
+    private float _speed = 0.015f, _speed2 = 0.004f, _speed3 = 0.035f;
     private Vector3 _playerPosition;
 
     public static bool Attack;
@@ -39,19 +39,19 @@ public class Minions : MonoBehaviour
         if (_isAttackTriggered)
         {
             var triggeredLerpPosition = new Vector3(_playerPosition.x, transform.position.y, _playerPosition.z);
-            transform.position = Vector3.Lerp(transform.position, triggeredLerpPosition, 0.03f);
+            transform.position = Vector3.Lerp(transform.position, triggeredLerpPosition, _speed3);
             return;
         }
 
         if (_isMagnetTriggered)
         {
             var triggeredLerpPosition = new Vector3(_playerPosition.x + 50, transform.position.y, _playerPosition.z);
-            transform.position = Vector3.Lerp(transform.position, triggeredLerpPosition, 0.003f);
+            transform.position = Vector3.Lerp(transform.position, triggeredLerpPosition, _speed2);
             return;
         }
 
         var lerpPosition = new Vector3(_playerPosition.x + 50, transform.position.y, transform.position.z);
-        transform.position = Vector3.Lerp(transform.position, lerpPosition, 0.003f);
+        transform.position = Vector3.Lerp(transform.position, lerpPosition, _speed2);
     }
     private void MoveTowardsRight()
     {
@@ -72,7 +72,7 @@ public class Minions : MonoBehaviour
 
         var lerpPosition = new Vector3(_decisivePosition.x - 2, transform.position.y, _decisivePosition.z - 10);
 
-        transform.position = Vector3.Lerp(transform.position, lerpPosition, 0.003f);
+        transform.position = Vector3.Lerp(transform.position, lerpPosition, _speed2);
         return;
     }
 
@@ -95,7 +95,7 @@ public class Minions : MonoBehaviour
 
         var lerpPosition = new Vector3(_decisivePosition.x + 2, transform.position.y, _decisivePosition.z + 10);
 
-        transform.position = Vector3.Lerp(transform.position, lerpPosition, 0.003f);
+        transform.position = Vector3.Lerp(transform.position, lerpPosition, _speed2);
         return;
     }
 

@@ -6,8 +6,7 @@ public class Player : MonoBehaviour
 {
     public static bool RescueMode, WinMode;
 
-    private readonly float _speed = 0.15f;
-    private Vector2 _initialFingerPosition;
+    private readonly float _speed = 0.2f;
 
     private void FixedUpdate()
     {
@@ -56,7 +55,7 @@ public class Player : MonoBehaviour
                 transform.position = new Vector3(
                     transform.position.x,
                     transform.position.y,
-                    transform.position.z - Input.touches[0].deltaPosition.x * 0.002f);
+                    transform.position.z - Input.touches[0].deltaPosition.x * 0.004f);
             }
         }
 #endif
